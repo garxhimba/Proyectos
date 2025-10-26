@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Aniversario, Mi Amor! ❤️</title>
+    <style>
+        /* -------------------------- */
+        /* ESTILOS GENERALES Y FONDO */
+        /* -------------------------- */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow: hidden; /* Oculta barras de desplazamiento si las flores salen */
+            background-image: url('https://i.pinimg.com/originals/bc/22/a8/bc22a864b99bfbfab6c1e7b52973916a.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Asegura que el fondo se mantenga fijo */
+            transition: background-color 0.5s ease;
+        }
+
+        /* -------------------------- */
+        /* ESTILO DEL CONTENEDOR CENTRAL (INVISIBLE AHORA) */
+        /* -------------------------- */
+        #contenedor-principal {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            /* Estos estilos se hacen transparentes/nulos */
+            background-color: transparent; /* Invisible */
+            border-radius: 15px;
+            box-shadow: none; /* Sin sombra */
+            backdrop-filter: none; /* Sin desenfoque */
+            -webkit-backdrop-filter: none;
+        }
+
+        /* -------------------------- */
+        /* ESTILO DEL BOTÓN DE REGALO */
+        /* -------------------------- */
+        #boton-regalo {
+            background-color: #ff69b4; /* Rosa Chicle */
+            color: white;
+            padding: 20px 40px;
+            border: 5px solid #fff;
+            border-radius: 50px; /* Borde más redondeado */
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Arial Black', Gadget, sans-serif;
+        }
+
+        #boton-regalo:hover {
+            background-color: #ff1493; /* Rosa Profundo al pasar el mouse */
+            transform: scale(1.05);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        #boton-regalo:active {
+            transform: scale(0.98);
+        }
+
+        /* -------------------------- */
+        /* ESTILO DE LA CARTA (INICIALMENTE OCULTA) */
+        /* -------------------------- */
+        #carta {
+            display: none; /* Inicialmente oculto */
+            position: relative;
+            background-color: #fff8e1; /* Papel crema/antiguo */
+            border: 10px solid #c2b280; /* Borde dorado/marrón claro */
+            padding: 30px;
+            margin-top: 30px;
+            width: 80vw; /* Ancho en relación al viewport */
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transform: scale(0.5); /* Empieza pequeño */
+            opacity: 0; /* Empieza transparente */
+            transition: all 1s ease-out; /* Transición para la animación de apertura */
+            text-align: center;
+            z-index: 15;
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Fuente solicitada */
+        }
+
+        .carta-visible {
+            display: block !important;
+            transform: scale(1) !important; /* Se agranda a tamaño normal */
+            opacity: 1 !important; /* Se hace visible */
+        }
+
+        /* -------------------------- */
+        /* ESTILO DEL TEXTO DE LA CARTA */
+        /* -------------------------- */
+        #texto-carta {
+            font-size: 1.4em;
+            line-height: 1.6;
+            color: #ff6666; /* Rojo claro, casi rosado */
+            /* Se eliminó el text-shadow para quitar el borde negro */
+        }
+        /* Media Query para tamaños de letra en móviles */
+        @media (max-width: 600px) {
+            #texto-carta {
+                font-size: 1.2em; /* Texto más pequeño en móviles */
+            }
+            #boton-regalo {
+                 padding: 15px 30px;
+                 font-size: 1.2em;
+            }
+        }
+
+        /* -------------------------- */
+        /* ESTILOS DE FLORES (PARTÍCULAS) - AHORA CON EMOJIS */
+        /* -------------------------- */
+        .flor {
+            position: absolute;
+            width: 30px; /* Tamaño para que el emoji se vea bien */
+            height: 30px;
+            pointer-events: none; /* Ignorar clicks */
+            opacity: 0; /* Empieza invisible */
+            z-index: 5;
+            animation: caer 10s linear infinite, flotar 5s ease-in-out infinite alternate;
+            font-size: 2em; /* Tamaño del emoji */
+            line-height: 1; /* Para que el emoji no tenga espacio extra */
+            text-shadow: 0 0 5px rgba(0,0,0,0.2); /* Pequeña sombra para que resalten */
+        }
+
+        .flor-amarilla::before {
+            content: "🌼"; /* Emoji de flor amarilla */
+        }
+
+        .flor-lavanda::before {
+            content: "🌸"; /* Emoji de flor de cerezo o similar a lavanda */
+        }
+
+
+        @keyframes caer {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes flotar {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(20px); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="contenedor-principal">
+        <button id="boton-regalo" onclick="abrirRegalo()">
+            ¡Clickea Aquí, Mi Amor!
+        </button>
+
+        <div id="carta">
+            <p id="texto-carta">
+                "Por nuestro segundo aniversario, te invito a un Picnic en el parque Cedro Golf, a la vuelta de la casa. Te amo, mi niña preciosa"
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const botonRegalo = document.getElementById('boton-regalo');
+        const carta = document.getElementById('carta');
+        const body = document.body;
+        const CANTIDAD_FLORES = 50;
+
+        // Función para generar un número aleatorio entre min y max (inclusive)
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Función que crea y anima las flores
+        function crearFlores() {
+            for (let i = 0; i < CANTIDAD_FLORES; i++) {
+                const flor = document.createElement('div');
+                flor.classList.add('flor');
+
+                // Alternar entre flores amarillas y lavanda
+                if (i % 2 === 0) {
+                    flor.classList.add('flor-amarilla');
+                } else {
+                    flor.classList.add('flor-lavanda');
+                }
+
+                // Posición inicial aleatoria fuera de la parte superior
+                flor.style.left = `${random(0, 100)}vw`;
+
+                // Retardo y duración de la animación aleatorios para un efecto más natural
+                flor.style.animationDelay = `-${random(0, 1000) / 100}s`; // Empieza en diferentes puntos del ciclo
+                flor.style.animationDuration = `${random(8, 15)}s`;
+
+                // El tamaño del elemento flor ahora controla el contenedor del emoji,
+                // el tamaño del emoji se controla con font-size en CSS.
+                // Aquí solo necesitamos un contenedor.
+                const size = random(25, 40); // Ajustar el tamaño del contenedor para el emoji
+                flor.style.width = `${size}px`;
+                flor.style.height = `${size}px`;
+
+
+                body.appendChild(flor);
+
+                // Forzar la visibilidad (al inicio estaban ocultas por CSS)
+                setTimeout(() => {
+                     flor.style.opacity = 1;
+                }, 50);
+
+            }
+        }
+
+        // Función principal que se ejecuta al clickear el botón
+        function abrirRegalo() {
+            // 1. Deshabilitar y ocultar el botón
+            botonRegalo.disabled = true;
+            botonRegalo.style.display = 'none';
+
+            // 2. Generar el efecto de flores
+            crearFlores();
+
+            // 3. Mostrar la carta con animación de apertura
+            setTimeout(() => {
+                carta.classList.add('carta-visible');
+            }, 500); // Pequeño retraso para que las flores empiecen a caer
+
+            // 4. Cambiar el fondo del body para que se sienta el "regalo"
+            body.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+        }
+
+        // OJO: La página se queda así hasta que se recarga (resetea), como solicitaste.
+    </script>
+</body>
+</html>
